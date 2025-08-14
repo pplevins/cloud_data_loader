@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: data-loader
+  namespace: pplevins-dev
+spec:
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+      nodePort: 30008
+  selector:
+    app: data-loader

@@ -1,5 +1,3 @@
-import os
-
 import mysql.connector
 
 from services.data_loader.model import Person
@@ -11,9 +9,9 @@ class PeopleDAL:
     def __init__(self, conn_str=None):
         """Constructor"""
         self.conn_str = conn_str or {
-            'host': 'mysql',
+            'host': '127.0.0.1',
             'user': 'root',
-            'password': os.getenv('MYSQL_ROOT_PASSWORD'),
+            'password': '1234',
             'port': 3306,
             'database': 'peopleDB'
         }

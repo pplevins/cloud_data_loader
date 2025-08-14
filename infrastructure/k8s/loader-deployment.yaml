@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-loader
+spec:
+  selector:
+    matchLabels:
+      app: data-loader
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: data-loader
+    spec:
+      containers:
+        - image: pplevins/cloud_data_loader
+          name: data-loader
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+          ports:
+            - containerPort: 8000
+              name: mysql

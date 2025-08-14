@@ -18,3 +18,7 @@ oc cp dat/create_data.sql mysql-8489dbcf89-zhv5c:/tmp/create_data.sql -n pplevin
 oc exec -it svc/mysql -n pplevins-dev -- bash
 mysql -u root -p"1234" < tmp/create_data.sql
 mysql -u root -p"1234" < tmp/insert_data.sql
+
+@REM --- Creating the data loader on the OpenShift cloud ---
+oc apply -f loader-deployment.yaml -n pplevins-dev
+oc apply -f loader-service.yaml -n pplevins-dev
