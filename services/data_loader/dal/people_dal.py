@@ -1,3 +1,5 @@
+import os
+
 import mysql.connector
 
 from services.data_loader.model import Person
@@ -9,9 +11,9 @@ class PeopleDAL:
     def __init__(self, conn_str=None):
         """Constructor"""
         self.conn_str = conn_str or {
-            'host': '10.128.13.30',
+            'host': 'mysql',
             'user': 'root',
-            'password': '1234',
+            'password': os.getenv('MYSQL_ROOT_PASSWORD'),
             'port': 3306,
             'database': 'peopleDB'
         }
@@ -29,7 +31,7 @@ class PeopleDAL:
             for row in cursor:
                 people.append(Person(
                     person_id=row['id'],
-                    first=row['codeName'],
-                    last=row['realName']
+                    first=row['firstName'],
+                    last=row['lastName']
                 ))
         return people
