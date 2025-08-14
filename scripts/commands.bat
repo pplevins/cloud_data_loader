@@ -8,6 +8,13 @@ oc apply -f mysql-deployment.yaml -n pplevins-dev           @REM create deployme
 oc apply -f mysql-service.yaml -n pplevins-dev              @REM create service
 oc port-forward svc/mysql 3306:3306 -n pplevins-dev         @REM forwarding the mysql service to local host
 
-@REM --- Building the application
+@REM --- Building the application ---
 docker build -t pplevins/cloud_data_loader:v1.0 .
 docker push pplevins/cloud_data_loader:v1.0
+
+@REM --- Creating database in the mysql pod ---
+oc cp dat/insert_data.sql mysql-8489dbcf89-zhv5c:/tmp/insert_data.sql -n pplevins-dev
+oc cp dat/create_data.sql mysql-8489dbcf89-zhv5c:/tmp/create_data.sql -n pplevins-dev
+oc exec -it svc/mysql -n pplevins-dev -- bash
+mysql -u root -p"1234" < tmp/create_data.sql
+mysql -u root -p"1234" < tmp/insert_data.sql

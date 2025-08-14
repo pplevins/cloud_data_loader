@@ -1,4 +1,6 @@
-CREATE TABLE peopleDB
+CREATE DATABASE IF NOT EXISTS peopleDB;
+USE peopleDB;
+CREATE TABLE data
 (
     id        INT PRIMARY KEY,
     firstName VARCHAR(50) NOT NULL,
