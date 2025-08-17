@@ -22,3 +22,4 @@ mysql -u root -p"1234" < tmp/insert_data.sql
 @REM --- Creating the data loader on the OpenShift cloud ---
 oc apply -f loader-deployment.yaml -n pplevins-dev
 oc apply -f loader-service.yaml -n pplevins-dev
+oc expose svc/data_lader -n pplevins-dev
