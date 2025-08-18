@@ -7,9 +7,9 @@ dal = PeopleDAL()
 
 
 @app.get("/get-all")
-async def get_record_values():
-    """Get record features from the model."""
+async def get_people_records():
+    """Get people records from the database."""
     try:
-        return {"values": dal.get_all_agents()}
+        return {"values": dal.get_all_people()}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))

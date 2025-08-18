@@ -22,7 +22,7 @@ class PeopleDAL:
         """Connect to database."""
         return mysql.connector.connect(**self.conn_str)
 
-    def get_all_agents(self):
+    def get_all_people(self):
         """Get all people from the database."""
         people = []
         with self.connect() as conn:
